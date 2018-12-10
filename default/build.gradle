@@ -1,0 +1,5 @@
+apply plugin: 'application'
+
+dependencies { compile "io.ktor:ktor-server-netty:${project.'ktor.version'}" }
+
+mainClassName = 'io.ktor.server.netty.EngineMain'

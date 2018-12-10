@@ -1,7 +1,5 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
+  repositories { jcenter() }
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.'kotlin.version'}"
     classpath "com.diffplug.spotless:spotless-plugin-gradle:${project.'spotless.version'}"
@@ -18,15 +16,26 @@ allprojects {
   sourceCompatibility = 11
   targetCompatibility = 11
 
+  sourceSets {
+    main {
+      kotlin { srcDirs += 'src/main/kotlin' }
+      java { srcDirs += 'src/main/java' }
+      resources { srcDirs += 'src/main/resources' }
+    }
+    test {
+      kotlin { srcDirs += 'src/test/kotlin' }
+      java { srcDirs += 'src/test/java' }
+      resources { srcDirs += 'src/test/resources' }
+    }
+  }
+
   jar {
     manifest {
       attributes('Implementation-Title': project.name, 'Implementation-Version': version)
     }
   }
 
-  repositories {
-    jcenter()
-  }
+  repositories { jcenter() }
 
   dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${project.'kotlin.version'}"
@@ -49,10 +58,10 @@ allprojects {
     }
     kotlin {
       ktlint().userData([
-        'indent_size': '2',
+        'indent_size'             : '2',
         'continuation_indent_size': '2',
-        'insert_final_newline': 'true',
-        'max_line_length': 'off'
+        'insert_final_newline'    : 'true',
+        'max_line_length'         : 'off'
       ])
     }
     groovyGradle {
